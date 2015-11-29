@@ -12,7 +12,7 @@ class Scanner(object):
         self.times     = '×'
         self.important = '!'
         self.args      = sys.argv
-        self.timeout = timeout
+        self.timeout   = timeout
 
         self.colors = {
             'green': '\033[92m',
@@ -68,6 +68,9 @@ class Scanner(object):
                         sock.connect((self.ip, int(port)))
                         sock.settimeout(None)
                         self.message('PORTA: %d - ABERTA' % int(port))
+                    except timeout:
+                        self.message('Timeout ao escanear a porta', 'error')
+                        continue
                     except:
                         self.message('PORTA: %d - FECHADA' % int(port), 'error')
                         continue
